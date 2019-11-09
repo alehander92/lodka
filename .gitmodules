@@ -1,0 +1,3 @@
+[submodule "Mero"]
+	path = Mero
+	url = git@github.com:alehander42/Mero.git
