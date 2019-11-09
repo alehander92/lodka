@@ -20,8 +20,3 @@ cp nimcache/@mMero@ssource@sirq.nim.c .
 cp nimcache/@mMero@ssource@sisrs.nim.c .
 cp nimcache/@mconsole.nim.c .
 cp nimcache/@mMero@ssource@skeyboard.nim.c .
-sed -i -e 's/<stdlib.h>/"stdlib.h"/g' *.c
-sed -i -e 's/<stdio.h>/"stdio.h"/g' *.c
-sed -i -e 's/<setjmp.h>/"setjmp.h"/g' *.c
-sed -i -e 's/<string.h>/"string.h"/g' *.c
-

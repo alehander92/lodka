@@ -4,7 +4,7 @@
 #define NIM_INTBITS 32
 
 #include "nimbase.h"
-#include "setjmp.h"
+#include <setjmp.h>
 #undef LANGUAGE_C
 #undef MIPSEB
 #undef MIPSEL
