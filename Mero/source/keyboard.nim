@@ -54,9 +54,7 @@ proc keyboardHandler*(regs: ptr registers) {.exportc.}=
     
 proc keyboardInstall* {.exportc.} =
   #Install they keyboard handler on irq1
-  #  {.emit: """
-  # installHandler(((unsigned int) 1), `keyboardHandler`);
-  #  """}
+  {.emit: "installHandler(((unsigned int) 1), `keyboardHandler`);".}
 
   # discard """
   # Why not just do this? It seems simpler, after all.
@@ -66,7 +64,7 @@ proc keyboardInstall* {.exportc.} =
   # Well, enter one of my 'favorite' parts of working on this: compiler bugs
   # https://github.com/nim-lang/Nim/issues/3708
   # """
-  installHandler(1, keyboardHandler)
+  # installHandler(1, keyboardHandler)
   consoleWriteNl("keyboard")
   # terminalWrite("Keyboard handler installed...\n")
   
