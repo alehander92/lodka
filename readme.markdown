@@ -8,15 +8,16 @@ sorry, the repo is not well done, so i had to git init again, but its based on n
 
 # how
 
-run the nim build with
+run the nim build with (change to your path)
 
 ```bash
 bash build_nim.sh
-docker run -v /home/al/nimkernel:/nimkernel -it joshwyant/gcc-cross
+docker run -v /home/al/lodka:/lodka -it joshwyant/gcc-cross
 ```
 then run in the docker container 
 
 ```bash
+cd /lodka
 bash build_c.sh
 ```
 
