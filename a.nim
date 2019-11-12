@@ -25,15 +25,23 @@ type
 
   Context = ref object
     filesystem: Filesystem
+    scheduler: Scheduler
 
 
   Scheduler* = ref object
     processes*: seq[Process]
     context*:   Context
+    currentProcess*: int
 
   Process* = ref object
     name*:      string
-    function*:  proc(context: Context)
+    # function*:  proc(context: Context)
+    registers*: Registers
+    id*:        int
+
+
+  Registers* = object
+
 
 # // fork of nimkernel: maybe we will! add mero and credit for now no!
 
@@ -75,10 +83,23 @@ proc sleep(ms: int) =
 # a.call() # it returns true or false and if false we copy the stack and stuff and wait
 # next call it again
 
+proc switchTasks(a: Registers, b: Registers) {.importc.}
+
+proc switchTasks(scheduler: Scheduler) =
+  var process = scheduler.processes[scheduler.currentProcess]
+  var nextProcess = scheduler.processes[if scheduler.currentProcess == 0: 1 else: 0] # TODO m
+  scheduler.currentProcess = nextProcess.id
+  switchTasks(process.registers, nextProcess.registers)
+
+
+template cooperate {.dirty.} =
+  switchTasks(context.scheduler)
+
 proc a(context: Context) =
   var i = 0
   while true:
     sleep(1_000)
+    cooperate
     var t = ""
     if i mod 2 == 0:
       t = "0"
@@ -91,6 +112,7 @@ proc b(context: Context) =
   var i = 0
   while true:
     sleep(1_000)
+    cooperate
     var t = ""
     if i mod 2 == 0:
       t = "2"
@@ -117,16 +139,25 @@ proc kmain*(header: pointer, b2: int) {.exportc.} =
   consoleX = 1
   consoleY = 0
   screenClear(screenColor)
-  consoleWriteNl("welcome")
-  keyboardInstall()
-  var context = Context(filesystem: Filesystem(root: file("/", @[file("a", ""), file("b", "")])))
-  context.filesystem.current = context.filesystem.root
-  ls(context)  
+  install()
+  {.emit: """
+  __asm__ __volatile__ ("sti");
+  """.}
 
-  var scheduler = initScheduler()
-  scheduler.schedule(context)
-  # scheduler.start(a)
-  # scheduler.start(b)
+  consoleWriteNl("welcome")
+  
+  # var scheduler = initScheduler()
+  # var context = Context(filesystem: Filesystem(root: file("/", @[file("a", ""), file("b", "")])), scheduler: scheduler)
+  # context.filesystem.current = context.filesystem.root
+  # context.scheduler.schedule(context)
+  # ls(context)  
+
+  # context.scheduler.register(0)
+  # context.scheduler.register(1)
+  # context.scheduler.run()
+  # a(context)
+  # var a0 = context.scheduler
+  # switchTasks(a0)
 
 # kmain(nil, 0)
 
@@ -138,10 +169,13 @@ proc kmain*(header: pointer, b2: int) {.exportc.} =
 
 proc install {.exportc.} =
   # from mero
+  consoleWriteNl("install")
   gdtInstall()
   idtInstall()
   isrsInstall()
   irqInstall()
+  keyboardInstall()
+  
 
 # based on mero
 proc fault_handler(regs: ptr registers) {.exportc.} =
@@ -167,7 +201,21 @@ proc schedule(scheduler: Scheduler, context: Context) =
   scheduler.context = context
   consoleWriteNl("schedule")
 
-proc start(scheduler: Scheduler, function: proc(context: Context)) =
+proc register(scheduler: Scheduler, id: int) =
   consoleWriteNl("function")
-  function(scheduler.context)
+  var process = Process(id: id)
+  if id == 0:
+    process.name = "a"
+  else:
+    process.name = "b"
+  
+  scheduler.processes.add(process)
+  # function(scheduler.context)
+
+proc run*(scheduler: Scheduler) =
+  let id = scheduler.processes[0].id
+  # if id == 0:
+  # a(scheduler.context)
+  # else:
+  #   b(scheduler.context)
 

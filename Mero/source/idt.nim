@@ -38,3 +38,8 @@ proc idtInstall* {.exportc.} =
 
   #Tell the cpu about our idt
   idtLoad()
+
+# this can be extracted to a lib
+# rust x86 
+# import x86_base ; install() 
+

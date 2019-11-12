@@ -5,7 +5,6 @@
 
 #include "nimbase.h"
 #include <setjmp.h>
-#include <string.h>
 #undef LANGUAGE_C
 #undef MIPSEB
 #undef MIPSEL
@@ -72,11 +71,6 @@ jmp_buf context;
 NIM_BOOL hasRaiseAction;
 tyProc__NT9bSe2DDkjdtx7j9aov2Z6g raiseAction;
 };
-typedef struct {
-N_NIMCALL_PTR(void, ClP_0) (tyObject_registers__Mb0UOAid9c9c7v7uFPX18mcg* r, void* ClE_0);
-void* ClE_0;
-} tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ;
-typedef N_CLOSURE_PTR(void, TM__ZrVepqz9a1O4OWN5tc4Iqnw_10) (tyObject_registers__Mb0UOAid9c9c7v7uFPX18mcg* r, void* ClE_0);
 typedef N_NIMCALL_PTR(void*, tyProc__g4DU8Xso7TeLfKjjMA54hg) (AllocatorObj* a, NI size, NI alignment);
 typedef N_NIMCALL_PTR(void, tyProc__f0fmYWZ9bBl5n2coKW0dYBQ) (AllocatorObj* a, void* p, NI size);
 typedef N_NIMCALL_PTR(void*, tyProc__pc9bof8Viqlm9byLAeLaBy4g) (AllocatorObj* a, void* p, NI oldSize, NI newSize);
@@ -117,9 +111,6 @@ static N_INLINE(void, popSafePoint)(void);
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___dS1BF3Vxjg9aJMmmhVJKSpQ)(NimStringV2* dest);
 N_NIMCALL(void, reraiseException)(void);
 N_NIMCALL(void, keyboardInstall)(void);
-N_NIMCALL(void, installHandler)(NI irq, tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ handler);
-static N_INLINE(void, nimZeroMem)(void* p, NI size);
-static N_INLINE(void, nimSetMem__JE6t4x7Z3v2iVz27Nx0MRAmemory)(void* a, int v, NI size);
 static const struct {
   NI cap; void* allocator; NIM_CHAR data[9+1];
 } TM__ZrVepqz9a1O4OWN5tc4Iqnw_3 = { 9, NIM_NIL, "keyboard2" };
@@ -135,8 +126,8 @@ static const NimStringV2 TM__ZrVepqz9a1O4OWN5tc4Iqnw_8 = {17, (NimStrPayload*)&T
 static const NimStringV2 TM__ZrVepqz9a1O4OWN5tc4Iqnw_9 = {24, (NimStrPayload*)&TM__ZrVepqz9a1O4OWN5tc4Iqnw_5};
 static const struct {
   NI cap; void* allocator; NIM_CHAR data[8+1];
-} TM__ZrVepqz9a1O4OWN5tc4Iqnw_11 = { 8, NIM_NIL, "keyboard" };
-static const NimStringV2 TM__ZrVepqz9a1O4OWN5tc4Iqnw_12 = {8, (NimStrPayload*)&TM__ZrVepqz9a1O4OWN5tc4Iqnw_11};
+} TM__ZrVepqz9a1O4OWN5tc4Iqnw_10 = { 8, NIM_NIL, "keyboard" };
+static const NimStringV2 TM__ZrVepqz9a1O4OWN5tc4Iqnw_11 = {8, (NimStrPayload*)&TM__ZrVepqz9a1O4OWN5tc4Iqnw_10};
 static N_INLINE(void, pushSafePoint)(TSafePoint* s) {}
 N_LIB_PRIVATE N_NIMCALL(NIM_CHAR, scanCodeToAscii__mfmfNCzuyizG3Gp9a8dDflg)(NU8 scancode) {	NIM_CHAR result;
 {	result = (NIM_CHAR)0;
@@ -293,19 +284,6 @@ N_NIMCALL(void, keyboardHandler)(tyObject_registers__Mb0UOAid9c9c7v7uFPX18mcg* r
 	}
 	if (TM__ZrVepqz9a1O4OWN5tc4Iqnw_2.status != 0) reraiseException();
 }
-static N_INLINE(void, nimSetMem__JE6t4x7Z3v2iVz27Nx0MRAmemory)(void* a, int v, NI size) {	void* T1_;
-	T1_ = (void*)0;
-	T1_ = memset(a, v, ((size_t) (size)));
-}
-static N_INLINE(void, nimZeroMem)(void* p, NI size) {	nimSetMem__JE6t4x7Z3v2iVz27Nx0MRAmemory(p, ((int) 0), size);
-}
-N_NIMCALL(void, keyboardInstall)(void) {	void* colontmpD_;
-	tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ T1_;
-	colontmpD_ = (void*)0;
-	colontmpD_ = 0;
-	colontmpD_ = NIM_NIL;
-	nimZeroMem((void*)(&T1_), sizeof(tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ));
-	T1_.ClP_0 = ((TM__ZrVepqz9a1O4OWN5tc4Iqnw_10) (keyboardHandler)); T1_.ClE_0 = colontmpD_;
-	installHandler(((NI) 1), T1_);
-	consoleWriteNl__RpCx8d9a9cozNvS9aKPon6r9cQ(TM__ZrVepqz9a1O4OWN5tc4Iqnw_12);
+N_NIMCALL(void, keyboardInstall)(void) {	installHandler(((unsigned int) 1), keyboardHandler);
+	consoleWriteNl__RpCx8d9a9cozNvS9aKPon6r9cQ(TM__ZrVepqz9a1O4OWN5tc4Iqnw_11);
 }

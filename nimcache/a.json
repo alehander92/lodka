@@ -4,9 +4,9 @@
 ["/home/al/lodka/nimcache/@mMero@ssource@sasmwrapper.nim.c", "gcc -c  -w -O3 -fno-strict-aliasing -fno-ident  -I/home/al/nim/lib -I/home/al/lodka -o /home/al/lodka/nimcache/@mMero@ssource@sasmwrapper.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@sasmwrapper.nim.c"],
 ["/home/al/lodka/nimcache/@mMero@ssource@sidt.nim.c", "gcc -c  -w -O3 -fno-strict-aliasing -fno-ident  -I/home/al/nim/lib -I/home/al/lodka -o /home/al/lodka/nimcache/@mMero@ssource@sidt.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@sidt.nim.c"],
 ["/home/al/lodka/nimcache/@mMero@ssource@sisrs.nim.c", "gcc -c  -w -O3 -fno-strict-aliasing -fno-ident  -I/home/al/nim/lib -I/home/al/lodka -o /home/al/lodka/nimcache/@mMero@ssource@sisrs.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@sisrs.nim.c"],
+["/home/al/lodka/nimcache/@mconsole.nim.c", "gcc -c  -w -O3 -fno-strict-aliasing -fno-ident  -I/home/al/nim/lib -I/home/al/lodka -o /home/al/lodka/nimcache/@mconsole.nim.c.o /home/al/lodka/nimcache/@mconsole.nim.c"],
 ["/home/al/lodka/nimcache/@mMero@ssource@sirq.nim.c", "gcc -c  -w -O3 -fno-strict-aliasing -fno-ident  -I/home/al/nim/lib -I/home/al/lodka -o /home/al/lodka/nimcache/@mMero@ssource@sirq.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@sirq.nim.c"],
 ["/home/al/lodka/nimcache/@mMero@ssource@sgdt.nim.c", "gcc -c  -w -O3 -fno-strict-aliasing -fno-ident  -I/home/al/nim/lib -I/home/al/lodka -o /home/al/lodka/nimcache/@mMero@ssource@sgdt.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@sgdt.nim.c"],
-["/home/al/lodka/nimcache/@mconsole.nim.c", "gcc -c  -w -O3 -fno-strict-aliasing -fno-ident  -I/home/al/nim/lib -I/home/al/lodka -o /home/al/lodka/nimcache/@mconsole.nim.c.o /home/al/lodka/nimcache/@mconsole.nim.c"],
 ["/home/al/lodka/nimcache/@mMero@ssource@skeyboard.nim.c", "gcc -c  -w -O3 -fno-strict-aliasing -fno-ident  -I/home/al/nim/lib -I/home/al/lodka -o /home/al/lodka/nimcache/@mMero@ssource@skeyboard.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@skeyboard.nim.c"],
 ["/home/al/lodka/nimcache/@ma.nim.c", "gcc -c  -w -O3 -fno-strict-aliasing -fno-ident  -I/home/al/nim/lib -I/home/al/lodka -o /home/al/lodka/nimcache/@ma.nim.c.o /home/al/lodka/nimcache/@ma.nim.c"]],
 "link":[
@@ -15,11 +15,11 @@
 "/home/al/lodka/nimcache/@mMero@ssource@sasmwrapper.nim.c.o",
 "/home/al/lodka/nimcache/@mMero@ssource@sidt.nim.c.o",
 "/home/al/lodka/nimcache/@mMero@ssource@sisrs.nim.c.o",
+"/home/al/lodka/nimcache/@mconsole.nim.c.o",
 "/home/al/lodka/nimcache/@mMero@ssource@sirq.nim.c.o",
 "/home/al/lodka/nimcache/@mMero@ssource@sgdt.nim.c.o",
-"/home/al/lodka/nimcache/@mconsole.nim.c.o",
 "/home/al/lodka/nimcache/@mMero@ssource@skeyboard.nim.c.o",
 "/home/al/lodka/nimcache/@ma.nim.c.o"
 ],
-"linkcmd": "gcc   -o /home/al/lodka/a  /home/al/lodka/nimcache/stdlib_allocators.nim.c.o /home/al/lodka/nimcache/stdlib_system.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@sasmwrapper.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@sidt.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@sisrs.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@sirq.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@sgdt.nim.c.o /home/al/lodka/nimcache/@mconsole.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@skeyboard.nim.c.o /home/al/lodka/nimcache/@ma.nim.c.o    -ldl"
+"linkcmd": "gcc   -o /home/al/lodka/a  /home/al/lodka/nimcache/stdlib_allocators.nim.c.o /home/al/lodka/nimcache/stdlib_system.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@sasmwrapper.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@sidt.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@sisrs.nim.c.o /home/al/lodka/nimcache/@mconsole.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@sirq.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@sgdt.nim.c.o /home/al/lodka/nimcache/@mMero@ssource@skeyboard.nim.c.o /home/al/lodka/nimcache/@ma.nim.c.o    -ldl"
 }

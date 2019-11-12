@@ -1,5 +1,6 @@
 import merosystem
-import memory, asmwrapper, idt
+import memory, asmwrapper, idt, ../../console
+
 
 {.emit: """
 extern void irq0();
@@ -102,9 +103,6 @@ proc irqRemap() =
   outb(0xA1, 0x00)
 
 proc irqInstall* {.exportc.} =
-  #Lazily do this instead of memset
-  for i in 0..15:
-    uninstallHandler(i)
 
   #Remove conflicts with IRQ 0 - IRQ 8
   irqRemap()
@@ -124,6 +122,7 @@ proc irqHandler*(regs: ptr registers) {.exportc: "irq_handler"} =
   if not handler.isNil:
     handler(regs)
 
+  # consoleWriteNl("irq handler")
   #If the int_no we got is above 39, send a response to the slave pic on 0xA0
   if irqIndex + 32 >= cast[uint32](40):
     outb(0xA0, 0x20)

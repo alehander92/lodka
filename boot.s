@@ -469,6 +469,11 @@ irq_common_stub:
     add esp, 8
     iret
 
+switchTasks:
+  iret
+
+extern switchTasks
+
 ; In just a few pages in this tutorial, we will add our Interrupt
 ; Service Routines (ISRs) right here!
 

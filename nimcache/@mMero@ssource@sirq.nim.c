@@ -77,9 +77,6 @@ jmp_buf context;
 NIM_BOOL hasRaiseAction;
 tyProc__NT9bSe2DDkjdtx7j9aov2Z6g raiseAction;
 };
-struct tyObject_RefHeader__Gi7WQzlT1ZRToh9a2ueYb4A {
-NI rc;
-};
 struct tyObject_registers__Mb0UOAid9c9c7v7uFPX18mcg {
 NU32 gs;
 NU32 fs;
@@ -101,7 +98,10 @@ NU32 eflags;
 NU32 useresp;
 NU32 ss;
 };
-typedef N_CLOSURE_PTR(void, TM__0xRZp3H9cHgeuOhm7vEmXCQ_5) (tyObject_registers__Mb0UOAid9c9c7v7uFPX18mcg* regs);
+struct tyObject_RefHeader__Gi7WQzlT1ZRToh9a2ueYb4A {
+NI rc;
+};
+typedef N_CLOSURE_PTR(void, TM__0xRZp3H9cHgeuOhm7vEmXCQ_4) (tyObject_registers__Mb0UOAid9c9c7v7uFPX18mcg* regs);
 typedef N_NIMCALL_PTR(void*, tyProc__g4DU8Xso7TeLfKjjMA54hg) (AllocatorObj* a, NI size, NI alignment);
 typedef N_NIMCALL_PTR(void, tyProc__f0fmYWZ9bBl5n2coKW0dYBQ) (AllocatorObj* a, void* p, NI size);
 typedef N_NIMCALL_PTR(void*, tyProc__pc9bof8Viqlm9byLAeLaBy4g) (AllocatorObj* a, void* p, NI oldSize, NI newSize);
@@ -152,35 +152,20 @@ static N_INLINE(void, popSafePoint)(void);
 N_NIMCALL(void, reraiseException)(void);
 N_NIMCALL(void, installHandler)(NI irq, tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ handler);
 N_NIMCALL(void, irqInstall)(void);
-N_LIB_PRIVATE N_NIMCALL(void, uninstallHandler__MHC2F9cdxbQ3CNvOoqNQsoQ)(NI irq);
-N_LIB_PRIVATE N_NIMCALL(void, eqsink___BCUz6kQ3JH73RuZW9cAy8iw)(tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ* dest, tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ src);
-static N_INLINE(void, nimDecWeakRef)(void* p);
 N_LIB_PRIVATE N_NIMCALL(void, irqRemap__L2csWl1nQ3kCSSiMCwVByw)(void);
 N_LIB_PRIVATE N_NIMCALL(void, outb__WHsX9cRAb9ansZ7pOaHMylNw)(NU16 port, NU8 value);
 N_LIB_PRIVATE N_NIMCALL(void, idtSetGate__uB9aAbzjB9bRgxmfLMWFiDxw)(NU8 num, NU32 base, NU16 sel, NU8 flags);
 N_LIB_PRIVATE N_NIMCALL(NU32, getIrq__nj7VDsgSqKXMeJByIbMM9cQ)(NI i);
 N_NIMCALL(void, irq_handler)(tyObject_registers__Mb0UOAid9c9c7v7uFPX18mcg* regs);
-N_LIB_PRIVATE N_NIMCALL(void, eq___BCUz6kQ3JH73RuZW9cAy8iw_2)(tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ* dest, tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ src);
+N_LIB_PRIVATE N_NIMCALL(void, eq___BCUz6kQ3JH73RuZW9cAy8iw)(tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ* dest, tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ src);
 static N_INLINE(void, nimIncRef)(void* p);
+static N_INLINE(void, nimDecWeakRef)(void* p);
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___wiZEASkr9bT3U9bPF8brGOJQ)(tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ* dest);
 tyArray__go59cYo0lifoWWnigBty2Tg irq_routines__YajyNUbwz3nSWLLa5toz3g;
-static NIM_CONST tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ TM__0xRZp3H9cHgeuOhm7vEmXCQ_3 = {NIM_NIL,NIM_NIL};
 static N_INLINE(void, pushSafePoint)(TSafePoint* s) {}
 static N_INLINE(void, popSafePoint)(void) {}
 N_NIMCALL(void, installHandler)(NI irq, tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ handler) {	  irq_routines__YajyNUbwz3nSWLLa5toz3g[irq] = handler;
   
-}
-static N_INLINE(void, nimDecWeakRef)(void* p) {	(*((tyObject_RefHeader__Gi7WQzlT1ZRToh9a2ueYb4A*) ((NI)((NU32)(((NI) (ptrdiff_t) (p))) - (NU32)(((NI) 4)))))).rc -= ((NI) 1);
-}
-N_LIB_PRIVATE N_NIMCALL(void, eqsink___BCUz6kQ3JH73RuZW9cAy8iw)(tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ* dest, tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ src) {	{
-		if (!(*dest).ClE_0) goto LA3_;
-		nimDecWeakRef((*dest).ClE_0);
-	}
-	LA3_: ;
-	(*dest).ClE_0 = src.ClE_0;
-	(*dest).ClP_0 = src.ClP_0;
-}
-N_LIB_PRIVATE N_NIMCALL(void, uninstallHandler__MHC2F9cdxbQ3CNvOoqNQsoQ)(NI irq) {	eqsink___BCUz6kQ3JH73RuZW9cAy8iw((&irq_routines__YajyNUbwz3nSWLLa5toz3g[(irq)- 0]), TM__0xRZp3H9cHgeuOhm7vEmXCQ_3);
 }
 N_LIB_PRIVATE N_NIMCALL(void, irqRemap__L2csWl1nQ3kCSSiMCwVByw)(void) {	outb__WHsX9cRAb9ansZ7pOaHMylNw(((NU16) 32), ((NU8) 17));
 	outb__WHsX9cRAb9ansZ7pOaHMylNw(((NU16) 160), ((NU8) 17));
@@ -248,42 +233,30 @@ N_LIB_PRIVATE N_NIMCALL(NU32, getIrq__nj7VDsgSqKXMeJByIbMM9cQ)(NI i) {	NU32 resu
   
 	return result;
 }
-N_NIMCALL(void, irqInstall)(void) {	{
+N_NIMCALL(void, irqInstall)(void) {	irqRemap__L2csWl1nQ3kCSSiMCwVByw();
+	{
 		NI i;
 		NI res;
 		i = (NI)0;
 		res = ((NI) 0);
 		{
 			while (1) {
+				NU32 T4_;
 				if (!(res <= ((NI) 15))) goto LA3;
 				i = res;
-				uninstallHandler__MHC2F9cdxbQ3CNvOoqNQsoQ(i);
+				T4_ = (NU32)0;
+				T4_ = getIrq__nj7VDsgSqKXMeJByIbMM9cQ(i);
+				idtSetGate__uB9aAbzjB9bRgxmfLMWFiDxw(((NU8) ((NI)(((NI) 32) + i))), T4_, ((NU16) (((NI) 8))), ((NU8) (((NI) 142))));
 				res += ((NI) 1);
 			} LA3: ;
-		}
-	}
-	irqRemap__L2csWl1nQ3kCSSiMCwVByw();
-	{
-		NI i_2;
-		NI res_2;
-		i_2 = (NI)0;
-		res_2 = ((NI) 0);
-		{
-			while (1) {
-				NU32 T7_;
-				if (!(res_2 <= ((NI) 15))) goto LA6;
-				i_2 = res_2;
-				T7_ = (NU32)0;
-				T7_ = getIrq__nj7VDsgSqKXMeJByIbMM9cQ(i_2);
-				idtSetGate__uB9aAbzjB9bRgxmfLMWFiDxw(((NU8) ((NI)(((NI) 32) + i_2))), T7_, ((NU16) (((NI) 8))), ((NU8) (((NI) 142))));
-				res_2 += ((NI) 1);
-			} LA6: ;
 		}
 	}
 }
 static N_INLINE(void, nimIncRef)(void* p) {	(*((tyObject_RefHeader__Gi7WQzlT1ZRToh9a2ueYb4A*) ((NI)((NU32)(((NI) (ptrdiff_t) (p))) - (NU32)(((NI) 4)))))).rc += ((NI) 1);
 }
-N_LIB_PRIVATE N_NIMCALL(void, eq___BCUz6kQ3JH73RuZW9cAy8iw_2)(tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ* dest, tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ src) {	{
+static N_INLINE(void, nimDecWeakRef)(void* p) {	(*((tyObject_RefHeader__Gi7WQzlT1ZRToh9a2ueYb4A*) ((NI)((NU32)(((NI) (ptrdiff_t) (p))) - (NU32)(((NI) 4)))))).rc -= ((NI) 1);
+}
+N_LIB_PRIVATE N_NIMCALL(void, eq___BCUz6kQ3JH73RuZW9cAy8iw)(tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ* dest, tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ src) {	{
 		if (!src.ClE_0) goto LA3_;
 		nimIncRef(src.ClE_0);
 	}
@@ -303,16 +276,16 @@ N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___wiZEASkr9bT3U9bPF8brGOJQ)(tyProc__1aEx
 	LA3_: ;
 }
 N_NIMCALL(void, irq_handler)(tyObject_registers__Mb0UOAid9c9c7v7uFPX18mcg* regs) {	tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ handler;
-	TSafePoint TM__0xRZp3H9cHgeuOhm7vEmXCQ_4;
-	pushSafePoint(&TM__0xRZp3H9cHgeuOhm7vEmXCQ_4);
-	TM__0xRZp3H9cHgeuOhm7vEmXCQ_4.status = setjmp(TM__0xRZp3H9cHgeuOhm7vEmXCQ_4.context);
-	if (TM__0xRZp3H9cHgeuOhm7vEmXCQ_4.status == 0) {
+	TSafePoint TM__0xRZp3H9cHgeuOhm7vEmXCQ_3;
+	pushSafePoint(&TM__0xRZp3H9cHgeuOhm7vEmXCQ_3);
+	TM__0xRZp3H9cHgeuOhm7vEmXCQ_3.status = setjmp(TM__0xRZp3H9cHgeuOhm7vEmXCQ_3.context);
+	if (TM__0xRZp3H9cHgeuOhm7vEmXCQ_3.status == 0) {
 		NU32 irqIndex;
 		irqIndex = (NU32)((NU32)((*regs).int_no) - (NU32)(((NU32) 32)));
-		eq___BCUz6kQ3JH73RuZW9cAy8iw_2((&handler), irq_routines__YajyNUbwz3nSWLLa5toz3g[(irqIndex)- 0]);
+		eq___BCUz6kQ3JH73RuZW9cAy8iw((&handler), irq_routines__YajyNUbwz3nSWLLa5toz3g[(irqIndex)- 0]);
 		{
 			if (!!((handler.ClP_0 == 0))) goto LA4_;
-			handler.ClE_0? handler.ClP_0(regs, handler.ClE_0):((TM__0xRZp3H9cHgeuOhm7vEmXCQ_5)(handler.ClP_0))(regs);
+			handler.ClE_0? handler.ClP_0(regs, handler.ClE_0):((TM__0xRZp3H9cHgeuOhm7vEmXCQ_4)(handler.ClP_0))(regs);
 		}
 		LA4_: ;
 		{
@@ -329,7 +302,7 @@ N_NIMCALL(void, irq_handler)(tyObject_registers__Mb0UOAid9c9c7v7uFPX18mcg* regs)
 	{
 		eqdestroy___wiZEASkr9bT3U9bPF8brGOJQ((&handler));
 	}
-	if (TM__0xRZp3H9cHgeuOhm7vEmXCQ_4.status != 0) reraiseException();
+	if (TM__0xRZp3H9cHgeuOhm7vEmXCQ_3.status != 0) reraiseException();
 }
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___s7Xz6U8AnHt9bxaO3CZFs2w)(tyProc__1aExiFCFu1i6s9aK9bwfoA9bQ* dest) {	NI colontmp_;
 	colontmp_ = ((NI) 0);
