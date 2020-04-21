@@ -2,7 +2,7 @@
 
 set -e
 
-nim c -f -c -d:danger --boundChecks:off --overflowChecks:off --nimcache:nimcache a.nim
+nim c -f -c -d:danger --boundChecks:off --overflowChecks:off --gc:arc --nimcache:nimcache a.nim
 assembly=(./c*.s)
 nasm -felf32 boot.s -o boot.o
 for file in "${assembly[@]}"; do

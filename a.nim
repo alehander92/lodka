@@ -3,7 +3,8 @@
 
 
 {.experimental:"codeReordering".}
-# based on mero and nimkernel for now
+## based on mero and nimkernel for now
+## a kernel module
 
 import Mero / source / [asmwrapper, merosystem, isrs, irq, gdt, idt, math, keyboard], console
 
@@ -85,7 +86,11 @@ proc sleep(ms: int) =
 
 proc switchTasks(a: Registers, b: Registers) {.importc.}
 
-proc switchTasks(scheduler: Scheduler) =
+
+
+proc switchTasks*(scheduler: Scheduler) =
+  ## a function which switches tasks: for multitasking
+  ## cant doc
   var process = scheduler.processes[scheduler.currentProcess]
   var nextProcess = scheduler.processes[if scheduler.currentProcess == 0: 1 else: 0] # TODO m
   scheduler.currentProcess = nextProcess.id
@@ -181,17 +186,18 @@ proc install {.exportc.} =
 proc fault_handler(regs: ptr registers) {.exportc.} =
   #Handle isr
 
-  #If it's an exception...
-  if regs.int_no < 32:
-    #Halt and notify the user
-    consoleWriteNl("================================================================================")
-    consoleWrite("Got exception ")
-    # consoleWriteNl(regs.int_no)
-    consoleWrite(": ")
-    consoleWriteNl(exceptionMessages[regs.int_no])
-    consoleWriteNl("================================================================================")
-    # writeRegisters(regs)
-    # panic("EXCEPTION!!!!")
+  discard
+  # #If it's an exception...
+  # if regs.int_no < 32:
+  #   #Halt and notify the user
+  #   consoleWriteNl("================================================================================")
+  #   consoleWrite("Got exception ")
+  #   # consoleWriteNl(regs.int_no)
+  #   consoleWrite(": ")
+  #   consoleWriteNl(exceptionMessages[regs.int_no])
+  #   consoleWriteNl("================================================================================")
+  #   # writeRegisters(regs)
+  #   # panic("EXCEPTION!!!!")
   
 
 proc initScheduler: owned Scheduler =
