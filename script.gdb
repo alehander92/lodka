@@ -1,4 +1,4 @@
-ery simple custom MBR that loads a kernel in protected mode at 0x7E00, you can debug both with something like:
+very simple custom MBR that loads a kernel in protected mode at 0x7E00, you can debug both with something like:
 
 add-symbol-file stage0.elf 0x7c00
 add-symbol-file stage1.elf 0x7e00

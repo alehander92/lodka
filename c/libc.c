@@ -4,6 +4,18 @@
 
 int HEAP = 50000000;
 
+void* calloc() {
+	return HEAP;
+}
+
+int signal() {
+	return 1;
+}
+
+int fflush() {
+	return 1;
+}
+
 void memset (void* a, int value, size_t size) {
 	char* a2 = a;
 	for(int i = 0; i < size; i += 1) {

@@ -2,21 +2,41 @@
 
 set -e
 
-nim c -f -c -d:danger --boundChecks:off --overflowChecks:off --gc:arc --nimcache:nimcache a.nim
-assembly=(./c*.s)
-nasm -felf32 boot.s -o boot.o
-for file in "${assembly[@]}"; do
+
+nim c --os:any --gc:arc -d:danger --compileOnly:on -d:StandaloneHeapSize:4096 --exceptions:goto -d:nimNoLibc -d:nimNoSignalHandler --noMain --nimcache:build start.nim
+
+
+
+# cd asm
+# assembly=(./c*.s)
+# cd ..
+# nasm -felf32 asm/boot.s -o build/boot.o
+~/opt/cross/bin/i686-elf-as asm/boot.s -o build/boot.o
+# for file in "${assembly[@]}"; do
   # credit https://stackoverflow.com/questions/2664740/extract-file-basename-without-path-and-extension-in-bash
-  i686-elf-as $file -o ${file%.s}.o
+  # ~/opt/cross/bin/i686-elf-as asm/$file -o build/${file%.s}.o
+# done
+
+cp c/libc.c build/
+
+cd build
+files=(./*.c)
+cd ..
+echo $files
+for file in "${files[@]}"; do
+  echo $file
+  # based on this tutorial http://www.osdever.net/bkerndev/Docs/keyboard.htm # -fno-strict-aliasing
+  ~/opt/cross/bin/i686-elf-gcc -c -w -ffreestanding -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdlib -nostdinc -fno-builtin -m32 -g3 -gdwarf -Wall -Wextra -I/usr/local/cross/lib/gcc/i686-elf/8.1.0/include-fixed/ -I/usr/local/cross/lib/gcc/i686-elf/8.1.0/include/ -L./c -I./c -o build/$file.o build/$file
 done
 
-cp nimcache/@ma.nim.c a2.c
-cp nimcache/stdlib_system.nim.c .
-cp nimcache/stdlib_allocators.nim.c .
-cp nimcache/@mMero@ssource@sasmwrapper.nim.c .
-cp nimcache/@mMero@ssource@sgdt.nim.c .
-cp nimcache/@mMero@ssource@sidt.nim.c .
-cp nimcache/@mMero@ssource@sirq.nim.c .
-cp nimcache/@mMero@ssource@sisrs.nim.c .
-cp nimcache/@mconsole.nim.c .
-cp nimcache/@mMero@ssource@skeyboard.nim.c .
+
+
+mv build/boot.o /tmp
+objects=(build/*.o)
+mv /tmp/boot.o build/
+
+# credit https://stackoverflow.com/questions/13470413/converting-a-bash-array-into-a-delimited-string
+printf -v objects2 ' %s' "${objects[@]}"
+echo $objects2
+~/opt/cross/bin/i686-elf-gcc -T linker.ld  -o build/start.bin -z max-page-size=0x1000 -ffreestanding -g3 -gdwarf -nostdlib build/boot.o $objects2
+
